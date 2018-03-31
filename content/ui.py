@@ -33,8 +33,6 @@ class Ui ():
 		self.nutrition_rate_list = list()
 
 		self.products_names_list = list()
-		self.heading = Heading()
-		self.sql_ui = Recovery()
 
 		self.categorie_id_list = list()
 		self.categorie_name_list = list()
@@ -44,6 +42,9 @@ class Ui ():
 		self.substitutes_name_list = list()
 		self.registered_products_id_list = list()
 		self.registered_products_name_list = list()
+
+		self.heading = Heading()
+		self.sql_ui = Recovery()
 
 
 	def main_page_database_display(self):
@@ -236,7 +237,7 @@ class Ui ():
 
 		self.heading.products_page_loading()
 		self.products_offset = page_count * 10
-		products = self.sql_ui.show_products(conn, categorie_id, self.products_limit, self.products_offset)
+		products = self.sql_ui.show_products_from_spec_categorie(conn, categorie_id, self.products_limit, self.products_offset)
 		print('\n\t\t\t','Name', '\n\n\n')
 		for product in products:
 			self.products_product_id_list.append(product.product_id)
@@ -263,7 +264,7 @@ class Ui ():
 	def products_details_display (self, conn, categorie_id, product_id):
 
 		self.heading.products_details_page_loading()
-		products = self.sql_ui.show_product_from_categorie(conn, categorie_id, product_id)
+		products = self.sql_ui.show_spec_product_from_spec_categorie(conn, categorie_id, product_id)
 		for product in products:
 			self.product_id_details = self.choice_product
 			print('  ', self.product_id_details,'\t', product.name, '\n\n\n\t shop(s) : ', product.shop, '\n\n\t nutrition_rate : ', product.nutrition_rate,
@@ -278,7 +279,7 @@ class Ui ():
 
 	def save_product(self, conn, categorie_id, product_id):
 
-		product = self.sql_ui.show_product_from_categorie(conn, categorie_id, product_id)
+		product = self.sql_ui.show_spec_product_from_spec_categorie(conn, categorie_id, product_id)
 
 		for pro in product:
 			name = pro.name
@@ -304,7 +305,7 @@ class Ui ():
 
 	def save_substitute(self, conn, categorie_id, product_id):
 
-		product = self.sql_ui.show_product_from_categorie(conn, categorie_id, product_id)
+		product = self.sql_ui.show_spec_product_from_spec_categorie(conn, categorie_id, product_id)
 
 		for pro in product:
 			name = pro.name
@@ -405,12 +406,12 @@ class Ui ():
 		self.heading.products_substitutes_loading()
 		self.substitutes_offset = page_count * 10
 
-		product_selected = self.sql_ui.show_product_from_categorie(conn, categorie_id, product_id)
+		product_selected = self.sql_ui.show_spec_product_from_spec_categorie(conn, categorie_id, product_id)
 
 		for product in product_selected:
 			pro_nutrition_rate=product.nutrition_rate
 
-		substitutes = self.sql_ui.substitutes_of_products(conn, product_id, categorie_id, pro_nutrition_rate, self.substitutes_limit, self.substitutes_offset)	
+		substitutes = self.sql_ui.show_substitutes_of_products(conn, product_id, categorie_id, pro_nutrition_rate, self.substitutes_limit, self.substitutes_offset)	
 		print('\n\t\t\t','Name', '\n\n\n')
 		for substitute in substitutes:
 			self.substitutes_product_id_list.append(substitute.product_id)
@@ -441,7 +442,7 @@ class Ui ():
 
 		self.heading.substitutes_details_loading()
 
-		substitute = self.sql_ui.show_product_from_categorie(conn, categorie_id, product_id)
+		substitute = self.sql_ui.show_spec_product_from_spec_categorie(conn, categorie_id, product_id)
 		for sub in substitute:
 			self.substitute_id_details = self.choice_substitutes
 			print('  ', self.substitute_id_details,'\t', sub.name, '\n\n\n\t shop(s) : ', sub.shop, '\n\n\t nutrition_rate : ', sub.nutrition_rate,

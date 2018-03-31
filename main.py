@@ -145,7 +145,7 @@ while proceed_menu is True:
 												proceed_database_menu = True
 
 											else:
-												base.delete_database(ui.choice_delete_database_start)
+												sql_main.delete_database(base.conn, ui.choice_delete_database_start)
 												ui.delete_database_end(ui.choice_delete_database_start)
 
 												if ui.choice_delete_database_end == "#dm":
@@ -162,7 +162,7 @@ while proceed_menu is True:
 											while proceed_select_database is True:
 												os.system("cls")
 												ui.select_database(base.conn)
-												base.show_databases()												
+												sql_main.show_databases_check_list(base.conn)												
 
 												if ui.choice_select_database == "#quit":
 													sys.exit("Closing the Application")
@@ -171,7 +171,7 @@ while proceed_menu is True:
 													proceed_select_database = False
 													proceed_database_menu = True
 
-												elif ui.choice_select_database in base.show_databases_list:
+												elif ui.choice_select_database in sql_main.databases_list:
 													base.connect_to_database(ui.choice_select_database)
 													proceed_select_database = False
 													proceed_app = True
@@ -187,7 +187,7 @@ while proceed_menu is True:
 															while step_1 is True:
 																os.system("cls")																
 																ui.categories_display(base.conn, page_count_categories)
-																base.number_page_categories(categories_number)														
+																sql_main.get_number_page_categories(base.conn, categories_number)														
 
 																if ui.choice_categorie == "#mm":
 																	page_count_categories = 0
@@ -197,7 +197,7 @@ while proceed_menu is True:
 																	proceed_app = True
 
 																elif ui.choice_categorie == ">":
-																	if page_count_categories < base.number_page_categorie:
+																	if page_count_categories < sql_main.number_page_categories:
 																		page_count_categories += 1
 
 																elif ui.choice_categorie == "<":
@@ -209,8 +209,8 @@ while proceed_menu is True:
 
 																elif re.search("([0-9]{1,})",ui.choice_categorie):
 																	ui.choice_categorie = int(ui.choice_categorie)
-																	base.categories_count()
-																	if ui.choice_categorie >= 1 and ui.choice_categorie <= base.categorie_count:
+																	sql_main.get_categories_count(base.conn)
+																	if ui.choice_categorie >= 1 and ui.choice_categorie <= sql_main.categories_count:
 																		print(ui.choice_categorie)
 																		print(type(ui.choice_categorie))
 																		step_1 = False
@@ -219,7 +219,7 @@ while proceed_menu is True:
 																		while step_2 is True:
 																			os.system("cls")
 																			ui.products_display(base.conn, ui.choice_categorie, page_count_products)
-																			base.number_page_products(ui.choice_categorie, products_number)
+																			sql_main.get_number_page_products(base.conn, ui.choice_categorie, products_number)
 
 																			if ui.choice_product == "#mm":
 																				page_count_categories = 0
@@ -229,7 +229,7 @@ while proceed_menu is True:
 																				proceed_app = True
 
 																			elif ui.choice_product == ">":
-																				if page_count_products < base.number_page_product:
+																				if page_count_products < sql_main.number_page_products:
 																					page_count_products += 1
 
 																			elif ui.choice_product == "<":
@@ -248,8 +248,8 @@ while proceed_menu is True:
 
 																			elif re.search("([0-9]{1,})",ui.choice_product):
 																				ui.choice_product =int(ui.choice_product)
-																				base.products_count(ui.choice_categorie)
-																				if ui.choice_product >= 1 and ui.choice_product <= base.product_count:
+																				sql_main.get_products_count_from_spec_categorie(base.conn, ui.choice_categorie)
+																				if ui.choice_product >= 1 and ui.choice_product <= sql_main.products_count:
 																					step_2 = False
 																					step_3 = True
 
@@ -287,13 +287,13 @@ while proceed_menu is True:
 																							while proceed_substitutes:
 																								os.system("cls")
 																								ui.substitutes_display(base.conn, ui.choice_categorie, ui.choice_product, page_count_substitutes)
-																								base.number_page_substitutes(ui.choice_categorie, ui.choice_product, substitutes_number)
+																								sql_main.get_number_page_substitutes(base.conn, ui.choice_categorie, ui.choice_product, substitutes_number)
 
 																								if ui.choice_substitutes == "#quit":
 																									sys.exit("Closing the Application")
 
 																								elif ui.choice_substitutes == ">":
-																									if page_count_substitutes < base.number_page_substitute:
+																									if page_count_substitutes < sql_main.number_page_substitutes:
 																										page_count_substitutes += 1
 
 																								elif ui.choice_substitutes == "<":
@@ -327,8 +327,8 @@ while proceed_menu is True:
 
 																								elif re.search("([0-9]{1,})",ui.choice_substitutes):
 																									ui.choice_substitutes = int(ui.choice_substitutes)
-																									base.substitutes_count(ui.choice_categorie, ui.choice_product)
-																									if ui.choice_substitutes >= 1 and ui.choice_substitutes <= base.substitute_count:
+																									sql_main.get_substitutes_count(base.conn, ui.choice_categorie, ui.choice_product)
+																									if ui.choice_substitutes >= 1 and ui.choice_substitutes <= sql_main.substitutes_count:
 																										proceed_substitutes = False
 																										proceed_substitute_details = True
 
@@ -456,7 +456,7 @@ while proceed_menu is True:
 															while proceed_registered_products:
 																os.system("cls")
 																ui.show_registered_products(base.conn, page_count_registered)
-																base.number_page_registered_products(registered_number)
+																sql_main.get_number_page_registered_products(base.conn, registered_number)
 
 																if ui.choice_registered_products == "#mm":
 																	page_count_registered = 0
@@ -484,7 +484,7 @@ while proceed_menu is True:
 																			proceed_app = True
 
 																elif ui.choice_registered_products == ">":
-																	if page_count_registered < base.number_page_registered_product:
+																	if page_count_registered < sql_main.number_page_registered_products:
 																		page_count_registered += 1
 
 																elif ui.choice_registered_products == "<":
@@ -493,8 +493,8 @@ while proceed_menu is True:
 
 																elif re.search("([0-9]{1,})",ui.choice_registered_products):
 																	ui.choice_registered_products = int(ui.choice_registered_products)
-																	base.registered_products_count()
-																	if ui.choice_registered_products >= 1 and ui.choice_registered_products <= base.registered_product_count:
+																	sql_main.get_registered_products_count(base.conn)
+																	if ui.choice_registered_products >= 1 and ui.choice_registered_products <= sql_main.registered_products_count:
 																		proceed_registered_products = False
 																		proceed_registered_products_details = True
 
