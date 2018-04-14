@@ -160,7 +160,6 @@ class Database():
             print("The table registered_products has already been created")
 
 
-
     def get_categories_name_url(self):
         """Selection and isolation of categories' names and urls from OpenFoodFacts API"""
         self.categories_json = requests.get('https://fr.openfoodfacts.org/categories.json').json()
@@ -333,11 +332,11 @@ class Database():
 
 
 
-def main():
-    print("Database construction with direct lauch started")
-    base = Database("root", "pierremotdepasse", "localhost")
+def main(username, password, host, database_name):
+    print("Database construction with direct lauch started\nWait it can take some time")
+    base = Database(username, password, host)
     base.connect_to_mysql()
-    base.connect_to_database("newtestttt")
+    base.connect_to_database(database_name)
     base.tables_creation()
     base.get_categories_name_url()
     base.insert_categories()
@@ -347,4 +346,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    username = input("Write your mysql username : ")
+    password = input("Write your mysql password : ")
+    host = input("Write your mysql hor : ")
+    database_name = input("Write a name for your database : ")
+    main(username, password, host, database_name)
