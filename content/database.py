@@ -348,6 +348,6 @@ def main(username, password, host, database_name):
 if __name__ == "__main__":
     username = input("Write your mysql username : ")
     password = input("Write your mysql password : ")
-    host = input("Write your mysql hor : ")
+    host = input("Write your mysql host : ")
     database_name = input("Write a name for your database : ")
     main(username, password, host, database_name)
