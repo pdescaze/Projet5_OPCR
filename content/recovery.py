@@ -1,11 +1,11 @@
-""" File recovery.py : contain the Class recovery() that contains all
-requests methods the Application does with mysql """
+""" File recovery.py : contains all requests functions
+the Application does with mysql """
 
 from math import floor
 
 
 def show_databases(conn):
-    """ Method that permits to recover databases from mysql"""
+    """ Function that permits to recover databases from mysql"""
     databases = conn.query("""
         SHOW DATABASES
         """)
