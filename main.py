@@ -266,7 +266,7 @@ while PROCEED_MENU is True:
                                                                     elif ui.choice_categorie == "#quit":
                                                                         sys.exit("Closing the Application")
 
-                                                                    elif re.search("([0-9]{1,})", ui.choice_categorie):
+                                                                    elif re.search("(^[0-9]{1,}$)", ui.choice_categorie):
                                                                         ui.choice_categorie = int(ui.choice_categorie)
                                                                         if ui.choice_categorie in ui.categories_id_list:
                                                                             PROCEED_CATEGORIES = False
@@ -302,7 +302,7 @@ while PROCEED_MENU is True:
                                                                                     PROCEED_PRODUCTS = False
                                                                                     PROCEED_CATEGORIES = True
 
-                                                                                elif re.search("([0-9]{1,})", ui.choice_product):
+                                                                                elif re.search("(^[0-9]{1,}$)", ui.choice_product):
                                                                                     ui.choice_product = int(ui.choice_product)
                                                                                     if ui.choice_product in ui.products_id_list:
                                                                                         PROCEED_PRODUCTS = False
@@ -380,7 +380,7 @@ while PROCEED_MENU is True:
                                                                                                         PROCEED_SUBSTITUTES = False
                                                                                                         PROCEED_APP = True
 
-                                                                                                    elif re.search("([0-9]{1,})", ui.choice_substitutes):
+                                                                                                    elif re.search("(^[0-9]{1,}$)", ui.choice_substitutes):
                                                                                                         ui.choice_substitutes = int(ui.choice_substitutes)
                                                                                                         if ui.choice_substitutes in ui.substitutes_id_list:
                                                                                                             PROCEED_SUBSTITUTES = False
@@ -545,7 +545,7 @@ while PROCEED_MENU is True:
                                                                         if PAGE_COUNT_REGISTERED > 0:
                                                                             PAGE_COUNT_REGISTERED -= 1
 
-                                                                    elif re.search("([0-9]{1,})", ui.choice_registered_products):
+                                                                    elif re.search("(^[0-9]{1,}$)", ui.choice_registered_products):
                                                                         ui.choice_registered_products = int(ui.choice_registered_products)
                                                                         if ui.choice_registered_products in ui.registered_products_id:
                                                                             PROCEED_REGISTERED_PRODUCTS = False
@@ -599,7 +599,7 @@ while PROCEED_MENU is True:
                                                                                 if PAGE_COUNT_REGISTERED > 0:
                                                                                     PAGE_COUNT_REGISTERED -= 1
 
-                                                                            elif re.search("([0-9]{1,})", ui.choice_registered_products_to_del):
+                                                                            elif re.search("(^[0-9]{1,}$)", ui.choice_registered_products_to_del):
                                                                                 ui.choice_registered_products_to_del = int(ui.choice_registered_products_to_del)
                                                                                 
                                                                                 if ui.choice_registered_products_to_del in ui.registered_products_id:
